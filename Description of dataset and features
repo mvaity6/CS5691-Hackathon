@@ -1,0 +1,75 @@
+OVERVIEW OF DATASET: 
+★ train.csv :train.csv has rows corresponding to tours shown to a biker, and data about whether he/she liked the tour or not. 
+★ test.csv:test.csv same as above train data, except for the last two columns of like/dislike 
+★ tour_convoy.csv:tour_convoy.csv consists of the list of bikers that showed interest in a particular tour. 
+★ bikers.csv:bikers.csv has feature information about bikers. 
+★ tours.csv:tours.csv consists of feature information about the tours. 
+★ bikers_network.csv:bikers_network.csv consists of the social networks of the bikers. This is derived from the group of bikers that know each other via some groups.
+
+FEATURES ALREADY PRESENT IN DATASET:
+★ Tour_id: Unique identifier for particular tour. 
+★ Biker_id: Unique identifier for a biker.
+★ Invited:bool variable to denote if the biker was invited to the particular tour. 
+★ Timestamp:Approximate time when the biker was informed about the tour. 
+★ Like: bool variable as per the entry made by biker. 1 indicates biker has liked the tour. 0 indicates that he has not responded to the 'like' question. 
+★ Dislike: bool variable as per the entry made by biker. 1 indicates biker has not-liked the tour. 0 indicates that he has not responded to the 'not_like' question. 
+★ Language_id:Identifier of the language biker speaks. 
+★ Location_id: Identifier of the location biker resides in. 
+★ Bornin:Year of birth of the biker to estimate their age. 
+★ Gender:male/female based on their bikers input. 
+★ Member_since:Date of joining the bikers interest group. 
+★ Area: bikers location (if known).
+★ Time_zone:this is the offset in minutes to GMT timezone. (For example Indian Time is +5:30 GMT, so +330 minutes). 
+★ Organizer:ID of the biker who organized the tour. 
+★ Tour_date:date on which tour was conducted. 
+★ City: location of tour (if known) 
+★ State: location of tour (if known)
+★ Pincode: location of tour (if known) 
+★ Country: location of tour (if known) 
+★ Latitude: approximate location of the starting point of the tour (if known) 
+★ Longitude: approximate location of the starting point of the tour (if known) 
+★ w1, w2, ..., w100: Number of occurrences of most common words in the description of the tour. 
+★ w_other : count of other words.
+
+FEATURES ADDED:
+● Latitude and longitude of bikers: Calculated latitude and longitude of bikers using geopy using areas of bikers which was given in bikers.csv dataset. 
+Then we imputed nan values of latitude and longitude of bikers by taking mean of coordinates of all of his friends which had a non null values of latitude 
+and longitude.
+● Latitude and longitude of tours: We imputed nan values of latitude and longitude of tours by taking the mean of coordinates of all of the bikers in the 
+‘going’ list of that particular tour which had a non null values of latitude and longitude.
+● Distance: Now we have latitude and longitude of both tours and bikers,so we calculated distance between the biker’s residence and tour’s location using geopy.
+● Clusters: Performed k-means clustering on 100 w’s given in the dataset and set k as 15.So for each data point in the training dataset we have 
+assigned one out of 15 clusters.
+● Going: Count of friends of the biker who are present in the ‘going’ list of that particular tour.
+● Invited: Count of friends of the biker who are present in the ‘invited’ list of that particular tour.
+● Not going: Count of friends of the biker who are present in the ‘not going’ list of that particular tour.
+● Maybe: Count of friends of the biker who are present in the ‘maybe’ list of that particular tour.
+● Total going: Total number of bikers who are present in the ‘going’ list of that particular tour.
+● Total invited: Total number of bikers who are present in the ‘invited’ list of that particular tour.
+● Total not going: Total number of bikers who are present in the ‘not going’ list of that particular tour.
+● Total maybe: Total number of bikers who are present in the ‘maybe’ list of that particular tour.
+● Tour day: Day of month on which tour is going to take place encoded from 1-31
+● Tour week: Day of week on which tour is going to take place encoded from 0-6
+● Tour month: Month in which tour is going to take place encoded from 1-12
+● Tour year: Year in which tour is going to take place.
+● Age: Time difference between tour date and bornin.
+● Friends with org:Whether tour organiser is a friend of a biker or not.
+● Total friends:Total number of friends of that particular biker.
+● Week: Day of the week, the biker was sent an invitation on. (0-6)
+● Month: Month, the biker was sent an invitation on. (1-12)
+● Year: Year, the biker was sent an invitation on.
+● Day: Day of the month, the biker was sent an invitation on. (1-31)
+● Tour on weekend:Whether the tour is happening on weekend or not.
+● Tour quarter:Quarter of year in which tour is happening.
+● Member week: day of the week, the biker joined the bikers interest group. (0-6)
+● Member month: Month, when the biker joined the bikers interest group. (1-12)
+● Member year: Year, when the biker joined the bikers interest group.
+● Member day: Day of the month, when the biker joined the bikers interest group.(1-31)
+● Membership time: Time difference between the date of tour and date of the biker joining the interest group.(in seconds)
+● Time gap: Time difference between the date of tour and date the biker was sent an invitation.
+● Group time: Time difference between the date of the biker joining the interest group and date the biker was sent an invitation on.
+
+
+
+
+
